@@ -1,0 +1,98 @@
+{% extends 'index.html' %}
+
+{% block body %}
+
+<div style="min-height:100vh;
+            background:linear-gradient(135deg,#f136b9,#eb8ae2);
+            display:flex;
+            justify-content:center;
+            align-items:center;">
+
+    <form method="POST"
+          style="background:white;
+                 padding:35px;
+                 border-radius:20px;
+                 width:400px;
+                 box-shadow:0 10px 25px rgba(109,40,217,.18);">
+
+        {% csrf_token %}
+
+        <h3 class="text-center mb-4 fw-bold" style="color:#6d28d9;">
+            ✏️ Update Product
+        </h3>
+
+        <div class="mb-3">
+            <label class="form-label fw-semibold">Product Name</label>
+            <input type="text"
+                   class="form-control"
+                   name="product_name"
+                   value="{{ obj.name }}"
+                   placeholder="Enter product name">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label fw-semibold">Price (₹)</label>
+            <input type="number"
+                   class="form-control"
+                   name="product_price"
+                   value="{{ obj.price }}"
+                   placeholder="Enter price">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label fw-semibold">Quantity</label>
+            <input type="number"
+                   class="form-control"
+                   name="product_quantity"
+                   value="{{ obj.quantity }}"
+                   placeholder="Enter quantity">
+        </div>
+
+        <div class="mb-4">
+            <label class="form-label fw-semibold">Category</label>
+
+            <select class="form-select" name="product_category">
+
+                <option value="Electronics"
+                    {% if obj.category == "Electronics" %}selected{% endif %}>
+                    Electronics
+                </option>
+
+                <option value="Clothing"
+                    {% if obj.category == "Clothing" %}selected{% endif %}>
+                    Clothing
+                </option>
+
+                <option value="Grocery"
+                    {% if obj.category == "Grocery" %}selected{% endif %}>
+                    Grocery
+                </option>
+
+                <option value="Beauty"
+                    {% if obj.category == "Beauty" %}selected{% endif %}>
+                    Grocery
+                </option>
+
+
+            </select>
+              
+        </div>
+         
+
+        <button type="submit"
+                class="btn w-100"
+                style="background:#7c3aed;
+                       color:white;
+                       font-weight:600;
+                       padding:10px;
+                       border-radius:10px;">
+
+            ✔ Update Product
+
+        </button>
+
+    </form>
+
+</div>
+
+{% endblock %}

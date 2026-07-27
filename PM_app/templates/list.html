@@ -1,0 +1,100 @@
+{% extends 'index.html' %}
+
+{% block body %}
+
+<div style="min-height:100vh;
+            background:linear-gradient(135deg,#f3e8ff,#ede9fe);
+            padding:40px;">
+
+    <h2 class="text-center mb-5 fw-bold" style="color:#6d28d9;">
+        📦 Product List
+    </h2>
+
+    <div class="container">
+        
+
+        <div class="row g-4 justify-content-center">
+
+            {% for emp in data %}
+
+            <!-- Product Card -->
+            <div class="card shadow border-0"
+                 style="border-radius:18px;
+                        width:350px;
+                        background:white;
+                        box-shadow:0 8px 20px rgba(109,40,217,.15);">
+
+                <div class="card-body p-4" style="text-align:left;">
+
+                    <h5 class="mb-3 fw-bold" style="color:#6d28d9;">
+                        {{ emp.name }}
+                    </h5>
+
+                   {% if emp.image %}
+                    <img src="{{ emp.image.url }}"
+                        class="card-img-top"
+                        style="height:200px; width:100%; object-fit:cover; border-radius:10px;">
+                    {% else %}
+                            <p>No Image Available</p>
+                    {% endif %}
+
+                    <p class="mb-2">
+                        <strong>💰 Price :</strong>
+                        ₹{{ emp.price }}
+                    </p>
+
+                    <p class="mb-2 text-secondary">
+                        <strong>📦 Stock :</strong>
+                        {{ emp.quantity }}
+                    </p>
+
+                    <p class="mb-3 text-secondary">
+                        <strong>🏷 Category :</strong>
+                        {{ emp.category }}
+                    </p>
+
+                    <p class="mb-2">
+                        <strong>🧾 Total Bill:</strong>
+                        ₹{{ emp.price|floatformat:2|add:"0" }}
+                    </p>
+
+                    <p class="mb-2">
+                        <strong>🧾 Total Bill:</strong>
+                        ₹{{ emp.total_bill }}
+                    </p>
+
+                    <div class="d-flex justify-content-between">
+
+                        <a href="/update/{{ emp.id }}"
+                           class="btn btn-sm"
+                           style="background:#7c3aed;color:white;">
+                            ✏ Edit
+                        </a>
+
+                        <a href="/delete/{{ emp.id }}"
+                           class="btn btn-sm"
+                           style="background:#dc2626;color:white;">
+                            🗑 Delete
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% empty %}
+
+            <p class="text-center fs-5 mt-5" style="color:#6d28d9;">
+                📦 No products available
+            </p>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
